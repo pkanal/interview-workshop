@@ -1,0 +1,271 @@
+import { themes } from "mdx-deck";
+
+export const theme = {
+  ...themes.code,
+  ...themes.prism,
+};
+
+# Technical Interviewing Workshop Extravaganza
+
+---
+
+## What we'll cover
+
+- Strategies for answering code questions
+- HackerRank style questions
+- Frontend code questions
+- Behavioural questions
+- Interview preparation plan!
+
+---
+
+## Familiarity with the problem is your most valuable asset
+
+<Notes>
+  - Think about a test that you've taken in the past that you did well on. - Ask
+  yourself, why did I do well? The answer was likely preparation, you had a
+  syllabus, expectations of the subject matter being covered, and you spent time
+  on focussed studying. - Now think about interviews, it's essentially a test
+  but you have limited to no information for how to prepare. How is anyone
+  supposed to do a good job??? - Let's try to maximize familiarity with
+  problems, while also not driving ourselves insane.
+</Notes>
+
+---
+
+## Common areas covered with interviews
+
+- HackerRank / Codility style questions
+- Building parts of frontend functionality
+- Frontend general knowledge
+- Behavioural questions
+
+<Notes>
+  - We can do our best to prep for these areas without covering absolutely
+  everything. - The goal here is to cover enough ground that things are fresh in
+  our minds so that even if we see a problem that's new, we can derive a
+  solution from a previous experience
+</Notes>
+
+---
+
+## HackerRank / Codility style questions
+
+- First of all, ugh
+- Step one: make sure we understand the problem, write out inputs and outputs
+- Step two: write out the logic required to get to the output in milestones
+- Step three: work through each milestone in code, set up a good way to verify
+- Step four: do enough of these problems that you get used to them
+
+<Notes>
+  - For most people, these questions are the most daunting because we don't
+  really work this way as developers. - The main strategy here is to solve lots
+  of these problems so our brains can get used to thinking that way
+</Notes>
+
+---
+
+## Example Time!
+
+Let's go through an example of solving a question. We'll be solving the [Repeated String](https://www.hackerrank.com/challenges/repeated-string/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=warmup) problem.
+
+---
+
+## Step one: understand the problem
+
+Inputs
+
+- `s`: a string that will be repeated to infinity (e.g. `aba`)
+- `n`: a number, the first `n` letters of the infinite string
+
+Outputs:
+
+- `s = 'aba'`, `n = 10`
+- first 10 letters of string: `abaabaabaa`
+- answer (total number of a's): 7
+
+<Notes>
+  - Go through the process of manually writing out thinking about inputs/outputs
+  even if they are given to you - This makes you go through the process of
+  solving the problem for one case, which brings us to the next step: logic
+</Notes>
+
+---
+
+## Step two: write out logic
+
+- Count the number of a's in `s`
+- Find the number of times the complete string would appear in the section of the infinite string & the remainder
+- Answer is the a count times the number of times the whole string would appear + the number of a's in the remainder string
+
+<Notes>
+  - As much as possible, we want to avoid writing code and solving the logic
+  puzzle at the same time - Start thinking about the logic puzzle first.
+</Notes>
+
+---
+
+## Step 3: write code based on each milestone
+
+- Count the number of a's in `s`
+
+```javascript
+const repeatedString = (s, n) => {
+  // filter string for # of a's
+  const numberOfAsInSubstring = s.split("").filter((e) => e === "a").length;
+
+  return numberOfAsInSubstring;
+};
+
+repeatedString("aba", 10); // expect 2
+```
+
+---
+
+## Step 3: write code based on each milestone
+
+- Find the number of times the complete string would appear in the section of the infinite string & the remainder
+
+```javascript
+const repeatedString = (s, n) => {
+  // filter string for # of a's
+  const numberOfAsInSubstring = s.split("").filter((e) => e === "a").length;
+
+  // number of times complete substring appears in string
+  const numberOfCompleteStrings = Math.floor(n / s.length);
+  // number of letters leftover
+  const leftoverStringLength = n % s.length;
+
+  return [numberOfCompleteStrings, leftoverStringLength];
+};
+
+repeatedString("aba", 10); // expect [3, 1]
+```
+
+---
+
+## Step 3: write code based on each milestone
+
+- Answer is the a count times the number of times the whole string would appear + the number of a's in the remainder string
+
+```javascript
+const repeatedString = (s, n) => {
+  // filter string for # of a's
+  const numberOfAsInSubstring = s.split("").filter((e) => e === "a").length;
+
+  // number of times complete substring appears in string
+  const numberOfCompleteStrings = Math.floor(n / s.length);
+  // number of letters leftover
+  const leftoverStringLength = n % s.length;
+
+  // leftover string count
+  const leftoverStringACount = s
+    .substring(0, leftoverStringLength)
+    .split("")
+    .filter((e) => e === "").length;
+
+  return numberOfAsInSubstring * numberOfCompleteStrings + leftoverStringACount;
+};
+
+repeatedString("aba", 10); // expect 7
+```
+
+<Notes>
+  - Advantage of doing it this way is you are validating the pieces of complex
+  logic as you go - shouldnt have to go back and console log a bunch
+</Notes>
+
+---
+
+## Step 4: do enough of these problems that you get used to them
+
+For the first few if you're stuck check the solution and move onto the next one
+
+- Jaden Case String (Codewars)
+- Baby Shark Lyrics Generator (Codewars)
+- Count by X (Codewars)
+- Mumbling (Codewars)
+- Jumping Number (Codewars)
+- Two to One (Codewars)
+- Roman Numeral Decoder (Codewars)
+- Sock Merchant (HackerRank)
+- Jumping on the Clouds (HackerRank)
+- Counting Valleys (HackerRank)
+
+---
+
+## Frontend Code Questions
+
+Most companies will either have you do a React question OR complete a task in the framework of your choice.
+
+Things to build to keep things fresh in your mind:
+
+- Typeahead using vanilla JavaScript
+- Todo app with React (add todos, complete them, show how many are remaining)
+- Make an API call and display a list of items, click into the item to display more info
+
+Some advanced things to build (optional):
+
+- Autocomplete component that pulls from an API
+- Input masking component (e.g. phone numbers)
+- Counter with React Context
+
+---
+
+## Frontend General knowledge
+
+Stuff to have an informed opinion about (think about your past experience and draw on it)
+
+- CSS framework preferences / preferred way to organize CSS in a project
+- Unit testing strategies
+- Performance considerations
+- A11y
+- State management
+
+---
+
+## Behavioural Questions
+
+Come up with examples for the following:
+
+- A time you received difficult feedback
+- A time you had to give someone difficult feedback
+- A project you're really proud of
+- A project that was hard and had lots of issues
+- Personal learning or growth
+- A time you demonstrated a care for users
+
+---
+
+## Format for answering behavioural questions
+
+- Present the situation clearly + provide context
+- Reflect on what you would have done differently
+- Reflect on what you learned from that experience
+
+[A good resource to fill out](http://www.crackingthecodinginterview.com/uploads/6/5/2/8/6528028/cracking_the_soft_skills_-_v6.pdf)
+
+---
+
+## A note on mental health & resiliancy
+
+- Interviews are a mentally gruelling process to go through
+- Things are already hard right now because of the pandemic
+- It is extremely important to care for yourself
+
+## What can we do to make things easier?
+
+- Find a group of people you can talk to and that can support you through this time
+- Is there someone that can help you with regular life things while you're interviewing?
+- Write down some things that bring you joy and _make time for them_
+- Don't overload yourself with volume of interviews
+
+---
+
+## Interview preparation plan
+
+- Practice HackerRank questions
+- Build a few common frontend features to keep things fresh in your mind
+- Write down your opinions based on your experience to some "general knowledge" questions
+- Reflect on your experiences to fill out your behavioural questions worksheet
+- Make a self care plan

@@ -1,0 +1,19 @@
+{
+  "name": "technical-interviewing",
+  "version": "1.0.0",
+  "description": "An MDX slide deck for the Bridge Technical Interviewing workshop",
+  "main": "index.js",
+  "scripts": {
+    "start": "mdx-deck deck.mdx",
+    "build": "mdx-deck build deck.mdx",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Purvi Kanal",
+  "license": "MIT",
+  "devDependencies": {
+    "mdx-deck": "^4.1.1"
+  },
+  "dependencies": {
+    "@mdx-deck/themes": "^4.1.0"
+  }
+}
